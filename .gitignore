@@ -1,3 +1,4 @@
 BasicBayes_Env/
 __pycache__*
 .vs*
+.gitignore
