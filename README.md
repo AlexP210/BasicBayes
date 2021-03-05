@@ -1,2 +1,2 @@
 # BasicBayes
-A simple python module for performing Bayesian analysis on datasets.
+A simple python module for performing Bayesian analysis.
