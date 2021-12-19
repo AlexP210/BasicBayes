@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # BasicBayes Tutorial
 
 ## Intro
@@ -135,25 +134,44 @@ To find the best fit, wwe can use the following workflow:
 
 
 ```python
-from BasicBayes import Parameter, Estimator
-
-# Represent the data
-X = [-1, -2, -1, -3, 2, 1, 0, 1]
-
-# Create the parameters and "bin" them to make the hypotheses
-mu = Parameter(name="Mu", description="Gaussian mean")
-mu.bin(min(X), max(X), 100)
-sigma = Parameter(name="Sigma", description="Gaussian standard deviation")
-sigma.bin(0, max(X) - min(X), 100, skip_first=True)
-
-# Get the likelihood function
-from BasicBayes.LikelihoodFunctions import gaussian
-
-# Create the estimator, and fit the data
-gaussian_estimator = Estimator(function=gaussian, parameters=[mu, sigma])
-gaussian_estimator.fit(X)
-
-# Plot the PDFs, and get the mode
+from BasicBayes import Parameter, Estimator
+
+
+
+# Represent the data
+
+X = [-1, -2, -1, -3, 2, 1, 0, 1]
+
+
+
+# Create the parameters and "bin" them to make the hypotheses
+
+mu = Parameter(name="Mu", description="Gaussian mean")
+
+mu.bin(min(X), max(X), 100)
+
+sigma = Parameter(name="Sigma", description="Gaussian standard deviation")
+
+sigma.bin(0, max(X) - min(X), 100, skip_first=True)
+
+
+
+# Get the likelihood function
+
+from BasicBayes.LikelihoodFunctions import gaussian
+
+
+
+# Create the estimator, and fit the data
+
+gaussian_estimator = Estimator(function=gaussian, parameters=[mu, sigma])
+
+gaussian_estimator.fit(X)
+
+
+
+# Plot the PDFs, and get the mode
+
 gaussian_estimator.report()
 ```
 
@@ -179,14 +197,22 @@ Now that we have the fitted estimator, we can even get the probability distribut
 
 
 ```python
-# Create the parameter for the next observation (don't forget to bin it)
-next_datum = Parameter(name="Next datum", description="The next observation to be recorded").bin(-5, 5, 100)
-
-# Call the estimator on it to transform it
-next_datum = gaussian_estimator(next_datum)
-
-# view the PDF
-next_datum.plot_pdf()
+# Create the parameter for the next observation (don't forget to bin it)
+
+next_datum = Parameter(name="Next datum", description="The next observation to be recorded").bin(-5, 5, 100)
+
+
+
+# Call the estimator on it to transform it
+
+next_datum = gaussian_estimator(next_datum)
+
+
+
+# view the PDF
+
+next_datum.plot_pdf()
+
 print(f"The most likely next observation is {next_datum.mode()}, with 95% confidence interval {next_datum.CI(0.95)}.")
 ```
 
@@ -217,27 +243,48 @@ To estimate the bias on the coin, as well as our uncertainty about it, we will f
 
 
 ```python
-from BasicBayes import Parameter, Estimator
-
-# Represent the data
-X = ["H", "H", "H", "H", "T", "T", "H", "T", "H"]
-
-# Set up a parameter representing the coin's bias
-bias = Parameter("Bias", "Probability of landing heads").bin(0, 1, 100)
-
-# Set up the likelihood function
-def likelihood_of_flip(flip_outcome, bias):
-    if flip_outcome == "H":
-        return bias
-    elif flip_outcome == "T":
-        return 1 - bias
-
-# Create the estimator, fit the data
-bias_estimator = Estimator(function=likelihood_of_flip, parameters=[bias], name="Bias Estimator", description="Estimation for the bias of the coin")
-bias_estimator.fit(X)
-
-# Check the PDF for the bias parameter
-bias.plot_pdf()
+from BasicBayes import Parameter, Estimator
+
+
+
+# Represent the data
+
+X = ["H", "H", "H", "H", "T", "T", "H", "T", "H"]
+
+
+
+# Set up a parameter representing the coin's bias
+
+bias = Parameter("Bias", "Probability of landing heads").bin(0, 1, 100)
+
+
+
+# Set up the likelihood function
+
+def likelihood_of_flip(flip_outcome, bias):
+
+    if flip_outcome == "H":
+
+        return bias
+
+    elif flip_outcome == "T":
+
+        return 1 - bias
+
+
+
+# Create the estimator, fit the data
+
+bias_estimator = Estimator(function=likelihood_of_flip, parameters=[bias], name="Bias Estimator", description="Estimation for the bias of the coin")
+
+bias_estimator.fit(X)
+
+
+
+# Check the PDF for the bias parameter
+
+bias.plot_pdf()
+
 print(f"The bias of the coin is {bias.mode()} with a 95% CI of {bias.CI(0.95)}.")
 ```
 
@@ -256,8 +303,10 @@ Again, we can also get the probability distribution for the outcome of the next 
 
 
 ```python
-next_flip = Parameter("Next Flip", "Next Flip of the Coin").categorical_bin(["H", "T"])
-next_flip = bias_estimator(next_flip)
+next_flip = Parameter("Next Flip", "Next Flip of the Coin").categorical_bin(["H", "T"])
+
+next_flip = bias_estimator(next_flip)
+
 next_flip.plot_pdf()
 ```
 
