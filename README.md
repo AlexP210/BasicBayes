@@ -604,27 +604,3 @@ slope.plot_pdf()
 
     
 ![svg](Demo_files/Demo_24_2.svg)
-    
-
-
-### Something Smells Funny: Does Australia ACTUALLY Have a Higher Rate of Political Pants-Shitting?
-
-
-```python
-from BasicBayes import Parameter, Estimator
-from BasicBayes.LikelihoodFunctions import poisson
-
-
-poisson_parameters = {}
-estimators = {}
-for country in ("USA", "Australia"):
-    poisson_parameters[country] = Parameter(name=country, description=f"Probability of {country}'s Head of State Shitting Themselves").bin(0, 5, 100)
-    estimators[country] = Estimator(likelihood_function=poisson)
-    poisson_parameters[country].set_probabilities(lambda x: poisson(x, 0))
-    
-
-```
-=======
-# BasicBayes
-A simple python module for performing Bayesian analysis.
->>>>>>> ebb86cdc973c56dc319450cbc402cac0f027f924
