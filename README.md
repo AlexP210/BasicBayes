@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # BasicBayes Tutorial
 
 ## Intro
@@ -574,3 +575,7 @@ for country in ("USA", "Australia"):
     
 
 ```
+=======
+# BasicBayes
+A simple python module for performing Bayesian analysis.
+>>>>>>> ebb86cdc973c56dc319450cbc402cac0f027f924
